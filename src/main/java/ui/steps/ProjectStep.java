@@ -1,8 +1,8 @@
-package steps;
+package ui.steps;
 
-import dto.Project;
+import ui.dto.Project;
 import lombok.extern.log4j.Log4j2;
-import pages.ProjectsPage;
+import ui.pages.ProjectsPage;
 
 @Log4j2
 public class ProjectStep {

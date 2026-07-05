@@ -1,6 +1,6 @@
-package pages;
+package ui.pages;
 
-import dict.Elements;
+import ui.dict.Elements;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
