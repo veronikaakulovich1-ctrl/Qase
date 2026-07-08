@@ -1,4 +1,4 @@
-package tests;
+package tests.ui;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
@@ -12,8 +12,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import steps.LoginStep;
-import steps.ProjectStep;
+import ui.steps.LoginStep;
+import ui.steps.ProjectStep;
+import ui.steps.RegistrationStep;
+import ui.pages.InactivePage;
+import ui.pages.LoginPage;
+import ui.pages.PasswordResetPage;
+import ui.pages.SignupPage;
 import utils.PropertyReader;
 
 import java.util.HashMap;
@@ -24,6 +29,11 @@ public class BaseTest {
 
     LoginStep loginStep;
     ProjectStep projectStep;
+    RegistrationStep registrationStep;
+    LoginPage loginPage;
+    PasswordResetPage passwordResetPage;
+    SignupPage signupPage;
+    InactivePage inactivePage;
 
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true, description = "Настройка драйвера")
@@ -57,6 +67,11 @@ public class BaseTest {
 
         loginStep = new LoginStep();
         projectStep = new ProjectStep();
+        registrationStep = new RegistrationStep();
+        loginPage = new LoginPage();
+        passwordResetPage = new PasswordResetPage();
+        signupPage = new SignupPage();
+        inactivePage = new InactivePage();
     }
 
     @AfterMethod(alwaysRun = true, description = "Закрытие браузера")

@@ -1,12 +1,12 @@
-package tests;
+package tests.ui;
 
-import dto.Project;
+import ui.dto.Project;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.Test;
 
-import static dto.ProjectFactory.getProject;
+import static ui.dto.ProjectFactory.getProject;
 import static org.testng.Assert.assertEquals;
 
 public class ProjectTest extends BaseTest {

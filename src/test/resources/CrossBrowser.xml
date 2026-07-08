@@ -11,21 +11,21 @@
 
     <test name="Chrome">
         <classes>
-            <class name="tests.ProjectTest"/>
+            <class name="tests.ui.ProjectTest"/>
             <parameter name="browser" value="chrome"></parameter>
         </classes>
     </test>
 
     <test name="Edge">
         <classes>
-            <class name="tests.ProjectTest"/>
+            <class name="tests.ui.ProjectTest"/>
             <parameter name="browser" value="edge"></parameter>
         </classes>
     </test>
 
     <test name="Firefox">
         <classes>
-            <class name="tests.ProjectTest"/>
+            <class name="tests.ui.ProjectTest"/>
             <parameter name="browser" value="firefox"></parameter>
         </classes>
     </test>
