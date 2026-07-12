@@ -38,7 +38,7 @@ public class CaseAPITest {
         Assert.assertEquals(response.result.description, "Created via API test");
     }
 
-    @Test(dependsOnMethods = "checkCreateCase")
+    @Test(dependsOnMethods = "checkGetCase")
     public void checkUpdateCase() {
         CaseUpdateRequest updateRequest = CaseUpdateRequest.builder()
                 .title("API Test Case Updated")
@@ -54,7 +54,7 @@ public class CaseAPITest {
         Assert.assertEquals(getResponse.result.description, "Updated via API test");
     }
 
-    @Test(dependsOnMethods = "checkCreateCase")
+    @Test(dependsOnMethods = "checkUpdateCase")
     public void checkDeleteCase() {
         CaseAdapter.deleteCase(CODE, caseId);
     }

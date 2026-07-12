@@ -1,6 +1,7 @@
 package ui.steps;
 
 import lombok.extern.log4j.Log4j2;
+import ui.pages.HeaderPage;
 import ui.pages.LoginPage;
 import utils.PropertyReader;
 
@@ -11,9 +12,11 @@ import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 public class LoginStep {
 
     LoginPage loginPage;
+    HeaderPage headerPage;
 
     public LoginStep() {
         loginPage = new LoginPage();
+        headerPage = new HeaderPage();
     }
 
     public void auth() {
@@ -54,5 +57,12 @@ public class LoginStep {
                 .clickCreateAccount()
                 .isPageOpened();
         webdriver().shouldHave(urlContaining("/signup"));
+    }
+
+    public void signOut() {
+        headerPage.openUserMenu()
+                .clickSignOut()
+                .isPageOpened();
+        webdriver().shouldHave(urlContaining("/login"));
     }
 }

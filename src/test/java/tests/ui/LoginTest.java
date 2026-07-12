@@ -96,4 +96,22 @@ public class LoginTest extends BaseTest {
         assertTrue(loginPage.isRememberMeSelected() != initialState,
                 "Remember me checkbox state should change after click");
     }
+
+    @Test(
+            description = "Sign out from user menu returns to login page",
+            groups = "smoke"
+    )
+    @Owner("Veronika Akulovich")
+    @Severity(SeverityLevel.CRITICAL)
+    public void checkSignOut() {
+        loginStep.auth();
+        loginStep.signOut();
+
+        assertTrue(loginPage.isEmailFieldVisible(),
+                "Email field isn't visible");
+        assertTrue(loginPage.isPasswordFieldVisible(),
+                "Password field isn't visible");
+        assertTrue(loginPage.isSignInButtonVisible(),
+                "Sign in button isn't visible");
+    }
 }

@@ -13,4 +13,5 @@ public class Elements {
     public static final String SEND_PASSWORD_RESET_LINK = "Send password reset link";
     public static final String CREATE_AN_ACCOUNT = "Create an account";
     public static final String SIGN_UP_WITH_EMAIL = "Sign up with email";
+    public static final String SIGN_OUT = "Sign out";
 }

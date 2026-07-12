@@ -13,6 +13,8 @@ public class ProjectAPITest {
 
     @Test
     public void checkCreateProject() {
+        ProjectAdapter.deleteProjectIfExists(CODE);
+
         ProjectRequest projectRequest = ProjectRequest.builder()
                 .title("QA34")
                 .code(CODE)
@@ -26,7 +28,7 @@ public class ProjectAPITest {
         Assert.assertEquals(projectResponse.result.code, "QA");
     }
 
-    @Test()
+    @Test
     public void checkDeleteProject() {
         ProjectAdapter.deleteProject(CODE);
     }

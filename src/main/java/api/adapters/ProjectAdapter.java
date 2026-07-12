@@ -5,6 +5,8 @@ import api.models.project.ProjectResponse;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.equalTo;
 
 public class ProjectAdapter extends BaseAdapter {
 
@@ -22,6 +24,16 @@ public class ProjectAdapter extends BaseAdapter {
                 .spec(ok200)
                 .extract()
                 .as(ProjectResponse.class);
+    }
+
+    public static void deleteProjectIfExists(String code) {
+        given()
+                .spec(spec)
+                .pathParams("code", code)
+                .when()
+                .delete("/project/{code}")
+                .then()
+                .statusCode(anyOf(equalTo(200), equalTo(404)));
     }
 
     public static void deleteProject(String code) {
