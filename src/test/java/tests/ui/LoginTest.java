@@ -5,6 +5,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.assertTrue;
 
@@ -17,13 +18,15 @@ public class LoginTest extends BaseTest {
     @Owner("Veronika Akulovich")
     @Severity(SeverityLevel.CRITICAL)
     public void checkLoginPageOpens() {
+        SoftAssert softAssert = new SoftAssert();
         loginStep.openLoginPage();
-        assertTrue(loginPage.isEmailFieldVisible(),
+        softAssert.assertTrue(loginPage.isEmailFieldVisible(),
                 "Email field isn't visible");
-        assertTrue(loginPage.isPasswordFieldVisible(),
+        softAssert.assertTrue(loginPage.isPasswordFieldVisible(),
                 "Password field isn't visible");
-        assertTrue(loginPage.isSignInButtonVisible(),
+        softAssert.assertTrue(loginPage.isSignInButtonVisible(),
                 "Sign in button isn't visible");
+        softAssert.assertAll();
     }
 
     @Test(
@@ -104,14 +107,16 @@ public class LoginTest extends BaseTest {
     @Owner("Veronika Akulovich")
     @Severity(SeverityLevel.CRITICAL)
     public void checkSignOut() {
+        SoftAssert softAssert = new SoftAssert();
         loginStep.auth();
         loginStep.signOut();
 
-        assertTrue(loginPage.isEmailFieldVisible(),
+        softAssert.assertTrue(loginPage.isEmailFieldVisible(),
                 "Email field isn't visible");
-        assertTrue(loginPage.isPasswordFieldVisible(),
+        softAssert.assertTrue(loginPage.isPasswordFieldVisible(),
                 "Password field isn't visible");
-        assertTrue(loginPage.isSignInButtonVisible(),
+        softAssert.assertTrue(loginPage.isSignInButtonVisible(),
                 "Sign in button isn't visible");
+        softAssert.assertAll();
     }
 }

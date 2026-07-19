@@ -4,12 +4,14 @@ import api.models.runs.RunCreateResponse;
 import api.models.runs.RunRequest;
 import api.models.runs.RunResponse;
 import api.models.runs.RunUpdateRequest;
+import io.qameta.allure.Step;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class RunAdapter extends BaseAdapter {
 
+    @Step("Create run in project '{code}' via API")
     public static RunCreateResponse createRun(String code, RunRequest request) {
         String body = given()
                 .spec(spec)
@@ -28,6 +30,7 @@ public class RunAdapter extends BaseAdapter {
         return gson.fromJson(body, RunCreateResponse.class);
     }
 
+    @Step("Get run '{id}' in project '{code}' via API")
     public static RunResponse getRun(String code, int id) {
         String body = given()
                 .spec(spec)
@@ -45,6 +48,7 @@ public class RunAdapter extends BaseAdapter {
         return gson.fromJson(body, RunResponse.class);
     }
 
+    @Step("Update run '{id}' in project '{code}' via API")
     public static void updateRun(String code, int id, RunUpdateRequest request) {
         given()
                 .spec(spec)
@@ -58,6 +62,7 @@ public class RunAdapter extends BaseAdapter {
                 .spec(ok200);
     }
 
+    @Step("Complete run '{id}' in project '{code}' via API")
     public static void completeRun(String code, int id) {
         given()
                 .spec(spec)
@@ -70,6 +75,7 @@ public class RunAdapter extends BaseAdapter {
                 .spec(ok200);
     }
 
+    @Step("Delete run '{id}' in project '{code}' via API")
     public static void deleteRun(String code, int id) {
         given()
                 .spec(spec)

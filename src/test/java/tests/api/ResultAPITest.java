@@ -17,6 +17,8 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.testng.Assert.*;
+
 public class ResultAPITest {
 
     private final String CODE = "QA";
@@ -28,8 +30,8 @@ public class ResultAPITest {
         CaseCreateResponse response = CaseAdapter.createCase(CODE,
                 CaseRequest.builder().title("Case for Result").build());
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         caseId = response.result.id;
     }
@@ -43,8 +45,8 @@ public class ResultAPITest {
                         .is_autotest(true)
                         .build());
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         runId = response.result.id;
     }
@@ -67,9 +69,9 @@ public class ResultAPITest {
                         .time_ms(1500)
                         .build());
 
-        Assert.assertTrue(response.status);
-        Assert.assertEquals(response.result.case_id, caseId);
-        Assert.assertNotNull(response.result.hash);
+        assertTrue(response.status);
+        assertEquals(response.result.case_id, caseId);
+        assertNotNull(response.result.hash);
 
         ResultAdapter.deleteResult(CODE, runId, response.result.hash);
     }

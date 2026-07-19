@@ -4,12 +4,14 @@ import api.models.suites.SuiteCreateResponse;
 import api.models.suites.SuiteRequest;
 import api.models.suites.SuiteResponse;
 import api.models.suites.SuiteUpdateRequest;
+import io.qameta.allure.Step;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class SuiteAdapter extends BaseAdapter {
 
+    @Step("Create suite in project '{code}' via API")
     public static SuiteCreateResponse createSuite(String code, SuiteRequest request) {
         String body = given()
                 .spec(spec)
@@ -28,6 +30,7 @@ public class SuiteAdapter extends BaseAdapter {
         return gson.fromJson(body, SuiteCreateResponse.class);
     }
 
+    @Step("Get suite '{id}' in project '{code}' via API")
     public static SuiteResponse getSuite(String code, int id) {
         String body = given()
                 .spec(spec)
@@ -45,6 +48,7 @@ public class SuiteAdapter extends BaseAdapter {
         return gson.fromJson(body, SuiteResponse.class);
     }
 
+    @Step("Update suite '{id}' in project '{code}' via API")
     public static SuiteCreateResponse updateSuite(String code, int id, SuiteUpdateRequest request) {
         String body = given()
                 .spec(spec)
@@ -62,6 +66,7 @@ public class SuiteAdapter extends BaseAdapter {
         return gson.fromJson(body, SuiteCreateResponse.class);
     }
 
+    @Step("Delete suite '{id}' in project '{code}' via API")
     public static void deleteSuite(String code, int id) {
         given()
                 .spec(spec)

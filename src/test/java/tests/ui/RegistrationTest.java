@@ -1,5 +1,6 @@
 package tests.ui;
 
+import org.testng.asserts.SoftAssert;
 import ui.dict.Elements;
 import ui.dto.User;
 import io.qameta.allure.Owner;
@@ -20,15 +21,17 @@ public class RegistrationTest extends BaseTest {
     @Owner("Veronika Akulovich")
     @Severity(SeverityLevel.CRITICAL)
     public void checkSignupPageOpens() {
+        SoftAssert softAssert = new SoftAssert();
         loginStep.openSignupPage();
-        assertTrue(signupPage.isEmailFieldVisible(),
+        softAssert.assertTrue(signupPage.isEmailFieldVisible(),
                 "Email field isn't visible");
-        assertTrue(signupPage.isPasswordFieldVisible(),
+        softAssert.assertTrue(signupPage.isPasswordFieldVisible(),
                 "Password field isn't visible");
-        assertTrue(signupPage.isPasswordConfirmationFieldVisible(),
+        softAssert.assertTrue(signupPage.isPasswordConfirmationFieldVisible(),
                 "Password confirmation field isn't visible");
-        assertTrue(signupPage.isSignUpButtonVisible(),
+        softAssert.assertTrue(signupPage.isSignUpButtonVisible(),
                 "Sign up with email button isn't visible");
+        softAssert.assertAll();
     }
 
     @Test(
@@ -39,11 +42,13 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void checkSuccessfulRegistration() {
         User user = getUser();
+        SoftAssert softAssert = new SoftAssert();
         registrationStep.registerNewUser(user);
-        assertTrue(inactivePage.isCongratulationsVisible(),
+        softAssert.assertTrue(inactivePage.isCongratulationsVisible(),
                 "Congratulations message isn't visible");
-        assertTrue(inactivePage.isRegisteredEmailDisplayed(user.getEmail()),
+        softAssert.assertTrue(inactivePage.isRegisteredEmailDisplayed(user.getEmail()),
                 "Registered email isn't displayed");
+        softAssert.assertAll();
     }
 
     @DataProvider(name = "signupData")
@@ -63,26 +68,28 @@ public class RegistrationTest extends BaseTest {
     @Owner("Veronika Akulovich")
     @Severity(SeverityLevel.NORMAL)
     public void checkSignupValidationErrors(String email, String password, String confirmation) {
+        SoftAssert softAssert = new SoftAssert();
         registrationStep.submitSignupForm(email, password, confirmation);
 
         if (email.isEmpty()) {
-            assertTrue(signupPage.isEmailErrorVisible(Elements.FIELD_REQUIRED_ERROR),
+            softAssert.assertTrue(signupPage.isEmailErrorVisible(Elements.FIELD_REQUIRED_ERROR),
                     "Email error should be visible");
         }
 
         if (password.isEmpty()) {
-            assertTrue(signupPage.isPasswordErrorVisible(Elements.PASSWORD_MIN_LENGTH_ERROR),
+            softAssert.assertTrue(signupPage.isPasswordErrorVisible(Elements.PASSWORD_MIN_LENGTH_ERROR),
                     "Password error should be visible");
         }
 
         if (confirmation.isEmpty()) {
-            assertTrue(signupPage.isPasswordConfirmationErrorVisible(Elements.PASSWORD_MIN_LENGTH_ERROR),
+            softAssert.assertTrue(signupPage.isPasswordConfirmationErrorVisible(Elements.PASSWORD_MIN_LENGTH_ERROR),
                     "Password confirmation error should be visible");
         }
 
         if (!password.isEmpty() && !confirmation.isEmpty() && !password.equals(confirmation)) {
-            assertTrue(signupPage.isPasswordConfirmationErrorVisible(Elements.PASSWORDS_MUST_MATCH_ERROR),
+            softAssert.assertTrue(signupPage.isPasswordConfirmationErrorVisible(Elements.PASSWORDS_MUST_MATCH_ERROR),
                     "Passwords must match error should be visible");
         }
+        softAssert.assertAll();
     }
 }

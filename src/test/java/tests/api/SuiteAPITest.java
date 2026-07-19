@@ -8,6 +8,8 @@ import api.models.suites.SuiteUpdateRequest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.*;
+
 public class SuiteAPITest {
 
     private final String CODE = "QA";
@@ -22,8 +24,8 @@ public class SuiteAPITest {
 
         SuiteCreateResponse response = SuiteAdapter.createSuite(CODE, request);
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         suiteId = response.result.id;
     }
@@ -32,10 +34,10 @@ public class SuiteAPITest {
     public void checkGetSuite() {
         SuiteResponse response = SuiteAdapter.getSuite(CODE, suiteId);
 
-        Assert.assertTrue(response.status);
-        Assert.assertEquals(response.result.id, suiteId);
-        Assert.assertEquals(response.result.title, "API Test Suite");
-        Assert.assertEquals(response.result.description, "Created via API test");
+        assertTrue(response.status);
+        assertEquals(response.result.id, suiteId);
+        assertEquals(response.result.title, "API Test Suite");
+        assertEquals(response.result.description, "Created via API test");
     }
 
     @Test(dependsOnMethods = "checkGetSuite")
@@ -47,11 +49,11 @@ public class SuiteAPITest {
 
         SuiteCreateResponse response = SuiteAdapter.updateSuite(CODE, suiteId, updateRequest);
 
-        Assert.assertTrue(response.status);
+        assertTrue(response.status);
 
         SuiteResponse getResponse = SuiteAdapter.getSuite(CODE, suiteId);
-        Assert.assertEquals(getResponse.result.title, "API Test Suite Updated");
-        Assert.assertEquals(getResponse.result.description, "Updated via API test");
+        assertEquals(getResponse.result.title, "API Test Suite Updated");
+        assertEquals(getResponse.result.description, "Updated via API test");
     }
 
     @Test(dependsOnMethods = "checkUpdateSuite")

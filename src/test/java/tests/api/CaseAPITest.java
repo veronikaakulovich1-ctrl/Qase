@@ -8,6 +8,8 @@ import api.models.cases.CaseUpdateRequest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.*;
+
 public class CaseAPITest {
 
     private final String CODE = "QA";
@@ -22,8 +24,8 @@ public class CaseAPITest {
 
         CaseCreateResponse response = CaseAdapter.createCase(CODE, caseRequest);
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         caseId = response.result.id;
     }
@@ -32,10 +34,10 @@ public class CaseAPITest {
     public void checkGetCase() {
         CaseResponse response = CaseAdapter.getCase(CODE, caseId);
 
-        Assert.assertTrue(response.status);
-        Assert.assertEquals(response.result.id, caseId);
-        Assert.assertEquals(response.result.title, "API Test Case");
-        Assert.assertEquals(response.result.description, "Created via API test");
+        assertTrue(response.status);
+        assertEquals(response.result.id, caseId);
+        assertEquals(response.result.title, "API Test Case");
+        assertEquals(response.result.description, "Created via API test");
     }
 
     @Test(dependsOnMethods = "checkGetCase")
@@ -47,11 +49,11 @@ public class CaseAPITest {
 
         CaseCreateResponse response = CaseAdapter.updateCase(CODE, caseId, updateRequest);
 
-        Assert.assertTrue(response.status);
+        assertTrue(response.status);
 
         CaseResponse getResponse = CaseAdapter.getCase(CODE, caseId);
-        Assert.assertEquals(getResponse.result.title, "API Test Case Updated");
-        Assert.assertEquals(getResponse.result.description, "Updated via API test");
+        assertEquals(getResponse.result.title, "API Test Case Updated");
+        assertEquals(getResponse.result.description, "Updated via API test");
     }
 
     @Test(dependsOnMethods = "checkUpdateCase")

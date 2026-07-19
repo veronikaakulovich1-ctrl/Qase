@@ -2,12 +2,14 @@ package api.adapters;
 
 import api.models.results.ResultCreateResponse;
 import api.models.results.ResultRequest;
+import io.qameta.allure.Step;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class ResultAdapter extends BaseAdapter {
 
+    @Step("Create result for run '{runId}' in project '{code}' via API")
     public static ResultCreateResponse createResult(String code, int runId, ResultRequest request) {
         String body = given()
                 .spec(spec)
@@ -26,6 +28,7 @@ public class ResultAdapter extends BaseAdapter {
         return gson.fromJson(body, ResultCreateResponse.class);
     }
 
+    @Step("Delete result '{hash}' for run '{runId}' in project '{code}' via API")
     public static void deleteResult(String code, int runId, String hash) {
         given()
                 .spec(spec)

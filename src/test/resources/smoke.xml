@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="2"
+<suite thread-count="1"
        name="Qase suite"
        parallel="tests">
 
@@ -16,7 +16,7 @@
             </run>
         </groups>
         <packages>
-            <package name="tests"/>
+            <package name="tests.ui"/>
         </packages>
     </test>
 </suite>

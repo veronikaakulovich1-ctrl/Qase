@@ -6,6 +6,9 @@ import api.models.project.ProjectResponse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 
 public class ProjectAPITest {
 
@@ -24,8 +27,8 @@ public class ProjectAPITest {
                 .build();
 
         ProjectResponse projectResponse = ProjectAdapter.checkCreateProject(projectRequest);
-        Assert.assertTrue(projectResponse.status);
-        Assert.assertEquals(projectResponse.result.code, "QA");
+        assertTrue(projectResponse.status);
+        assertEquals(projectResponse.result.code, "QA");
     }
 
     @Test

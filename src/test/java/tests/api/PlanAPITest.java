@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.testng.Assert.*;
+
 public class PlanAPITest {
 
     private final String CODE = "QA";
@@ -27,8 +29,8 @@ public class PlanAPITest {
 
         CaseCreateResponse response = CaseAdapter.createCase(CODE, caseRequest);
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         caseId = response.result.id;
     }
@@ -43,8 +45,8 @@ public class PlanAPITest {
 
         PlanCreateResponse response = PlanAdapter.createPlan(CODE, request);
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         planId = response.result.id;
     }
@@ -53,11 +55,11 @@ public class PlanAPITest {
     public void checkGetPlan() {
         PlanResponse response = PlanAdapter.getPlan(CODE, planId);
 
-        Assert.assertTrue(response.status);
-        Assert.assertEquals(response.result.id, planId);
-        Assert.assertEquals(response.result.title, "API Test Plan");
-        Assert.assertEquals(response.result.description, "Created via API test");
-        Assert.assertEquals(response.result.cases_count, Integer.valueOf(1));
+        assertTrue(response.status);
+        assertEquals(response.result.id, planId);
+        assertEquals(response.result.title, "API Test Plan");
+        assertEquals(response.result.description, "Created via API test");
+        assertEquals(response.result.cases_count, Integer.valueOf(1));
     }
 
     @Test(dependsOnMethods = "checkGetPlan")
@@ -69,11 +71,11 @@ public class PlanAPITest {
 
         PlanCreateResponse response = PlanAdapter.updatePlan(CODE, planId, updateRequest);
 
-        Assert.assertTrue(response.status);
+        assertTrue(response.status);
 
         PlanResponse getResponse = PlanAdapter.getPlan(CODE, planId);
-        Assert.assertEquals(getResponse.result.title, "API Test Plan Updated");
-        Assert.assertEquals(getResponse.result.description, "Updated via API test");
+        assertEquals(getResponse.result.title, "API Test Plan Updated");
+        assertEquals(getResponse.result.description, "Updated via API test");
     }
 
     @Test(dependsOnMethods = "checkUpdatePlan")

@@ -16,6 +16,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.testng.Assert.*;
+
 public class RunAPITest {
 
     private final String CODE = "QA";
@@ -28,8 +30,8 @@ public class RunAPITest {
         CaseCreateResponse response = CaseAdapter.createCase(CODE,
                 CaseRequest.builder().title("Case for Run").build());
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         caseId = response.result.id;
     }
@@ -42,8 +44,8 @@ public class RunAPITest {
                         .cases(List.of(caseId))
                         .build());
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         planId = response.result.id;
     }
@@ -59,8 +61,8 @@ public class RunAPITest {
 
         RunCreateResponse response = RunAdapter.createRun(CODE, request);
 
-        Assert.assertTrue(response.status);
-        Assert.assertNotNull(response.result.id);
+        assertTrue(response.status);
+        assertNotNull(response.result.id);
 
         runId = response.result.id;
     }
@@ -69,11 +71,11 @@ public class RunAPITest {
     public void checkGetRun() {
         RunResponse response = RunAdapter.getRun(CODE, runId);
 
-        Assert.assertTrue(response.status);
-        Assert.assertEquals(response.result.id, runId);
-        Assert.assertEquals(response.result.title, "API Test Run");
-        Assert.assertEquals(response.result.description, "Created via API test");
-        Assert.assertEquals(response.result.plan_id, planId);
+        assertTrue(response.status);
+        assertEquals(response.result.id, runId);
+        assertEquals(response.result.title, "API Test Run");
+        assertEquals(response.result.description, "Created via API test");
+        assertEquals(response.result.plan_id, planId);
     }
 
     @Test(dependsOnMethods = "checkGetRun")
@@ -85,8 +87,8 @@ public class RunAPITest {
                         .build());
 
         RunResponse getResponse = RunAdapter.getRun(CODE, runId);
-        Assert.assertEquals(getResponse.result.title, "API Test Run Updated");
-        Assert.assertEquals(getResponse.result.description, "Updated via API test");
+        assertEquals(getResponse.result.title, "API Test Run Updated");
+        assertEquals(getResponse.result.description, "Updated via API test");
     }
 
     @Test(dependsOnMethods = "checkUpdateRun")
@@ -94,8 +96,8 @@ public class RunAPITest {
         RunAdapter.completeRun(CODE, runId);
 
         RunResponse response = RunAdapter.getRun(CODE, runId);
-        Assert.assertEquals(response.result.status, Integer.valueOf(1));
-        Assert.assertNotNull(response.result.end_time);
+        assertEquals(response.result.status, Integer.valueOf(1));
+        assertNotNull(response.result.end_time);
     }
 
     @Test(dependsOnMethods = "checkCompleteRun")

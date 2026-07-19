@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="3"
-       name="Qase suite"
+<suite thread-count="1"
+       name="Qase CrossBrowser suite"
        parallel="tests">
 
     <listeners>
-        <listener class-name="listeners.TestListener"></listener>
-        <listener class-name="listeners.AnnotationTransformer"></listener>
+        <listener class-name="listeners.TestListener"/>
+        <listener class-name="listeners.AnnotationTransformer"/>
     </listeners>
 
     <test name="Chrome">
-        <classes>
-            <class name="tests.ui.ProjectTest"/>
-            <parameter name="browser" value="chrome"></parameter>
-        </classes>
+        <parameter name="browser" value="chrome"/>
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.ui"/>
+        </packages>
     </test>
 
     <test name="Edge">
-        <classes>
-            <class name="tests.ui.ProjectTest"/>
-            <parameter name="browser" value="edge"></parameter>
-        </classes>
+        <parameter name="browser" value="edge"/>
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.ui"/>
+        </packages>
     </test>
 
     <test name="Firefox">
-        <classes>
-            <class name="tests.ui.ProjectTest"/>
-            <parameter name="browser" value="firefox"></parameter>
-        </classes>
+        <parameter name="browser" value="firefox"/>
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.ui"/>
+        </packages>
     </test>
 </suite>
