@@ -72,14 +72,17 @@ public class BaseTest {
                     "--incognito",
                     "--disable-notifications",
                     "--disable-popup-blocking",
-                    "--disable-infobars"
+                    "--disable-infobars",
+                    "--headless"
             );
             Configuration.browserCapabilities = options;
         } else if (browser.equalsIgnoreCase("edge")) {
             EdgeOptions options = new EdgeOptions();
+            options.addArguments("--headless");
             Configuration.browserCapabilities = options;
         } else if (browser.equalsIgnoreCase("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
             Configuration.browserCapabilities = options;
         }
 
