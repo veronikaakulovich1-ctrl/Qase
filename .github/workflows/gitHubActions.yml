@@ -37,8 +37,11 @@ jobs:
         password=${{ secrets.SD_PASSWORD }}
         api.token=${{ secrets.SD_API_TOKEN }}
         EOF
-    - name: Run tests
-      run: mvn clean test
+    - name: Run UI smoke tests
+      run: mvn clean test -DsuiteXmlFile=src/test/resources/smoke.xml
+
+    - name: Run API smoke tests
+      run: mvn test -DsuiteXmlFile=src/test/resources/api-smoke.xml
 
     - name: Get Allure history
       uses: actions/checkout@v2
