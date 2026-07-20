@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"ae6328211ad7538861929c00156f47fe","name":"Qase suite","statistic":{"failed":1,"broken":0,"skipped":0,"passed":12,"unknown":0,"total":13}},{"uid":"b5c42f34071c68bbeee32ca0c4a1fc48","name":"API Smoke","statistic":{"failed":0,"broken":0,"skipped":0,"passed":14,"unknown":0,"total":14}}]}
