@@ -52,6 +52,10 @@ public class BaseTest {
     PlansPage plansPage;
     RunsPage runsPage;
 
+    protected String user = System.getProperty("user");
+    protected String password = System.getProperty("password");
+    protected String apiToken = System.getProperty("apiToken");
+
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true, description = "Настройка драйвера")
     public void setUp(@Optional("chrome") String browser) {
