@@ -41,6 +41,7 @@ jobs:
       run: mvn clean test -DsuiteXmlFile=src/test/resources/smoke.xml
 
     - name: Run API smoke tests
+      if: always()
       run: mvn test -DsuiteXmlFile=src/test/resources/api-smoke.xml
 
     - name: Get Allure history
