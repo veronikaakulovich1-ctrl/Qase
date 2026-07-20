@@ -33,16 +33,16 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Step("Login with user name '{}' and password '{}'")
+    @Step("Login with valid user name  and password")
     public void login(String user, String password) {
-        log.info("Login with user name '{}' and password '{}'", user, password);
+        log.info("Login with user name  and password");
         $(shadowCss(COOKIE_ACCEPT, COOKIE_BANNER)).click();
         submitLogin(user, password);
     }
 
-    @Step("Submit login form with email '{}' and password '{}'")
+    @Step("Submit login form with email and password ")
     public LoginPage submitLogin(String email, String password) {
-        log.info("Submit login form with email '{}' and password '{}'", email, password);
+        log.info("Submit login form with email  and password");
         $(LOGIN).setValue(email);
         $(PASSWORD).setValue(password);
         return clickSignIn();

@@ -5,7 +5,6 @@ import api.models.suites.SuiteCreateResponse;
 import api.models.suites.SuiteRequest;
 import api.models.suites.SuiteResponse;
 import api.models.suites.SuiteUpdateRequest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -24,8 +23,8 @@ public class SuiteAPITest {
 
         SuiteCreateResponse response = SuiteAdapter.createSuite(CODE, request);
 
-        assertTrue(response.status);
-        assertNotNull(response.result.id);
+        assertTrue(response.status, "Create suite response status should be true");
+        assertNotNull(response.result.id, "Created suite id should not be null");
 
         suiteId = response.result.id;
     }
@@ -34,10 +33,13 @@ public class SuiteAPITest {
     public void checkGetSuite() {
         SuiteResponse response = SuiteAdapter.getSuite(CODE, suiteId);
 
-        assertTrue(response.status);
-        assertEquals(response.result.id, suiteId);
-        assertEquals(response.result.title, "API Test Suite");
-        assertEquals(response.result.description, "Created via API test");
+        assertTrue(response.status, "Get suite response status should be true");
+        assertEquals(response.result.id, suiteId,
+                "Suite id should match the created suite id");
+        assertEquals(response.result.title, "API Test Suite",
+                "Suite title should match the created value");
+        assertEquals(response.result.description, "Created via API test",
+                "Suite description should match the created value");
     }
 
     @Test(dependsOnMethods = "checkGetSuite")
@@ -49,11 +51,13 @@ public class SuiteAPITest {
 
         SuiteCreateResponse response = SuiteAdapter.updateSuite(CODE, suiteId, updateRequest);
 
-        assertTrue(response.status);
+        assertTrue(response.status, "Update suite response status should be true");
 
         SuiteResponse getResponse = SuiteAdapter.getSuite(CODE, suiteId);
-        assertEquals(getResponse.result.title, "API Test Suite Updated");
-        assertEquals(getResponse.result.description, "Updated via API test");
+        assertEquals(getResponse.result.title, "API Test Suite Updated",
+                "Suite title should match the updated value");
+        assertEquals(getResponse.result.description, "Updated via API test",
+                "Suite description should match the updated value");
     }
 
     @Test(dependsOnMethods = "checkUpdateSuite")

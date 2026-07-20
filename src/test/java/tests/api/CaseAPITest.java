@@ -5,7 +5,6 @@ import api.models.cases.CaseCreateResponse;
 import api.models.cases.CaseRequest;
 import api.models.cases.CaseResponse;
 import api.models.cases.CaseUpdateRequest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -24,8 +23,8 @@ public class CaseAPITest {
 
         CaseCreateResponse response = CaseAdapter.createCase(CODE, caseRequest);
 
-        assertTrue(response.status);
-        assertNotNull(response.result.id);
+        assertTrue(response.status, "Create case response status should be true");
+        assertNotNull(response.result.id, "Created case id should not be null");
 
         caseId = response.result.id;
     }
@@ -34,10 +33,13 @@ public class CaseAPITest {
     public void checkGetCase() {
         CaseResponse response = CaseAdapter.getCase(CODE, caseId);
 
-        assertTrue(response.status);
-        assertEquals(response.result.id, caseId);
-        assertEquals(response.result.title, "API Test Case");
-        assertEquals(response.result.description, "Created via API test");
+        assertTrue(response.status, "Get case response status should be true");
+        assertEquals(response.result.id, caseId,
+                "Case id should match the created case id");
+        assertEquals(response.result.title, "API Test Case",
+                "Case title should match the created value");
+        assertEquals(response.result.description, "Created via API test",
+                "Case description should match the created value");
     }
 
     @Test(dependsOnMethods = "checkGetCase")
@@ -49,11 +51,13 @@ public class CaseAPITest {
 
         CaseCreateResponse response = CaseAdapter.updateCase(CODE, caseId, updateRequest);
 
-        assertTrue(response.status);
+        assertTrue(response.status, "Update case response status should be true");
 
         CaseResponse getResponse = CaseAdapter.getCase(CODE, caseId);
-        assertEquals(getResponse.result.title, "API Test Case Updated");
-        assertEquals(getResponse.result.description, "Updated via API test");
+        assertEquals(getResponse.result.title, "API Test Case Updated",
+                "Case title should match the updated value");
+        assertEquals(getResponse.result.description, "Updated via API test",
+                "Case description should match the updated value");
     }
 
     @Test(dependsOnMethods = "checkUpdateCase")

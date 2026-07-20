@@ -10,7 +10,6 @@ import api.models.results.ResultCreateResponse;
 import api.models.results.ResultRequest;
 import api.models.runs.RunCreateResponse;
 import api.models.runs.RunRequest;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -30,8 +29,8 @@ public class ResultAPITest {
         CaseCreateResponse response = CaseAdapter.createCase(CODE,
                 CaseRequest.builder().title("Case for Result").build());
 
-        assertTrue(response.status);
-        assertNotNull(response.result.id);
+        assertTrue(response.status, "Create case for result response status should be true");
+        assertNotNull(response.result.id, "Created case id should not be null");
 
         caseId = response.result.id;
     }
@@ -45,8 +44,8 @@ public class ResultAPITest {
                         .is_autotest(true)
                         .build());
 
-        assertTrue(response.status);
-        assertNotNull(response.result.id);
+        assertTrue(response.status, "Create run for result response status should be true");
+        assertNotNull(response.result.id, "Created run id should not be null");
 
         runId = response.result.id;
     }
@@ -69,9 +68,11 @@ public class ResultAPITest {
                         .time_ms(1500)
                         .build());
 
-        assertTrue(response.status);
-        assertEquals(response.result.case_id, caseId);
-        assertNotNull(response.result.hash);
+        assertTrue(response.status,
+                "Create result response status should be true for status: " + status.getValue());
+        assertEquals(response.result.case_id, caseId,
+                "Result case id should match the created case id");
+        assertNotNull(response.result.hash, "Result hash should not be null");
 
         ResultAdapter.deleteResult(CODE, runId, response.result.hash);
     }

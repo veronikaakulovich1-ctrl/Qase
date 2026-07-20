@@ -24,7 +24,7 @@ public class LoginStep {
     }
 
     public void auth(String user, String password) {
-        log.info("Login with user name '{}' and password '{}'", user, password);
+        log.info("Login with valid user name  and password");
         loginPage.open()
                 .isPageOpened()
                 .login(user, password);
